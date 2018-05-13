@@ -11,7 +11,7 @@
     session.removeAttribute("entity");
 
 %>
-<form action="${pageContext.request.contextPath}/PersonageClass" method="post">
+<form action="${pageContext.request.contextPath}/Race" method="post">
     <div>
         <label for="id">id</label>
         <input id="id" name="id" type="number" min="0"

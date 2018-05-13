@@ -58,4 +58,9 @@ public class WeaponOfPersonageEntity extends PrettyEntity {
     public long primaryKey() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return this.weapon.getName();
+    }
 }

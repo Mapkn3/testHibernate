@@ -8,6 +8,7 @@ import java.util.Collection;
 public class PersonageEntity extends PrettyEntity {
     private long id;
     private String name;
+    private Long xp;
     private Long level;
     private String alignment;
     private String characteristics;
@@ -34,6 +35,16 @@ public class PersonageEntity extends PrettyEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "PERSONAGEXP")
+    public Long getXp() {
+        return xp;
+    }
+
+    public void setXp(Long xp) {
+        this.xp = xp;
     }
 
     @Basic
@@ -140,5 +151,9 @@ public class PersonageEntity extends PrettyEntity {
     @Override
     public long primaryKey() {
         return id;
+    }
+
+    public static Long calculateLevel(Long xp) {
+        return (xp / 2000) + 1;
     }
 }

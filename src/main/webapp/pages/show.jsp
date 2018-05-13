@@ -13,6 +13,7 @@
     Class metadata = (Class)session.getAttribute("metadata");
     String className = metadata.getSimpleName();
 %><h1><%=className%></h1>
+<a href="${pageContext.request.contextPath}">Homepage</a>
 <table border="1" cellspacing="0">
     <tr><%
     for (Field field : metadata.getDeclaredFields()) {

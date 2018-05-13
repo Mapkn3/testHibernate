@@ -12,7 +12,6 @@ public class WeaponEntity extends PrettyEntity{
     private Long criticalBonus;
     private String typeOfWeapon;
     private Long rangeOfWeapon;
-    private Long ammunition;
     private String damage;
 
     @Id
@@ -76,16 +75,6 @@ public class WeaponEntity extends PrettyEntity{
     }
 
     @Basic
-    @Column(name = "AMMUNITION")
-    public Long getAmmunition() {
-        return ammunition;
-    }
-
-    public void setAmmunition(Long ammunition) {
-        this.ammunition = ammunition;
-    }
-
-    @Basic
     @Column(name = "DAMAGE")
     public String getDamage() {
         return damage;
@@ -110,7 +99,6 @@ public class WeaponEntity extends PrettyEntity{
         if (typeOfWeapon != null ? !typeOfWeapon.equals(that.typeOfWeapon) : that.typeOfWeapon != null) return false;
         if (rangeOfWeapon != null ? !rangeOfWeapon.equals(that.rangeOfWeapon) : that.rangeOfWeapon != null)
             return false;
-        if (ammunition != null ? !ammunition.equals(that.ammunition) : that.ammunition != null) return false;
         if (damage != null ? !damage.equals(that.damage) : that.damage != null) return false;
 
         return true;
@@ -124,7 +112,6 @@ public class WeaponEntity extends PrettyEntity{
         result = 31 * result + (criticalBonus != null ? criticalBonus.hashCode() : 0);
         result = 31 * result + (typeOfWeapon != null ? typeOfWeapon.hashCode() : 0);
         result = 31 * result + (rangeOfWeapon != null ? rangeOfWeapon.hashCode() : 0);
-        result = 31 * result + (ammunition != null ? ammunition.hashCode() : 0);
         result = 31 * result + (damage != null ? damage.hashCode() : 0);
         return result;
     }

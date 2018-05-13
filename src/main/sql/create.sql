@@ -34,9 +34,8 @@ CREATE TABLE weapon (
     nameOfWeapon VARCHAR2(20),
     attackBonus NUMBER,
     criticalBonus NUMBER,
-    typeOfWeapon VARCHAR2(3),
+    typeOfWeapon VARCHAR2(10),
     rangeOfWeapon NUMBER,
-    ammunition NUMBER,
     damage VARCHAR2(4),
     PRIMARY KEY (weaponId)
 );
@@ -44,8 +43,9 @@ CREATE TABLE weapon (
 CREATE TABLE personage (
     personageId NUMBER NOT NULL,
     personageName VARCHAR2(30),
+    personageXp NUMBER,
     personageLevel NUMBER,
-    personageAlignment VARCHAR2(3),
+    personageAlignment VARCHAR2(2),
     personageCharacteristics VARCHAR2(200),
     personageClass NUMBER NOT NULL,
     personageRace NUMBER NOT NULL,

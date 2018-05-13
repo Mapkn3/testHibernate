@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="entities.PersonageClassEntity" %>
-<%@ page import="java.util.List" %>
 <%@ page import="entities.SpellEntity" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -34,7 +34,10 @@
             <%
                 for (PersonageClassEntity personageClass : personageClasses) {
             %>
-                    <option value="<%=personageClass.getId()%>"><%=personageClass.getName()%></option>
+            <option value="<%=personageClass.getId()%>"
+                    <%=(entity != null && entity.getPersonageClass().getId() == personageClass.getId())?"selected":""%>>
+                <%=personageClass.getName()%>
+            </option>
             <%
                 }
             %>
