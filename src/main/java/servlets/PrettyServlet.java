@@ -35,10 +35,10 @@ public class PrettyServlet extends HttpServlet {
                     if (entity != null) {
                         dao.deleteEntity(entity);
                     }
-                    resp.sendRedirect(req.getContextPath()+"/entities?action=show&type="+type);
+                    resp.sendRedirect(req.getContextPath() + "/entities?action=show&type=" + type);
                     break;
                 case "edit":
-                    resp.sendRedirect(req.getContextPath()+"/"+type+"?id="+req.getParameter("id"));
+                    resp.sendRedirect(req.getContextPath() + "/" + type + "?id=" + req.getParameter("id"));
                     break;
             }
         } catch (ClassNotFoundException e) {
