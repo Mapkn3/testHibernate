@@ -45,12 +45,4 @@ public class PrettyServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Session session = new HibernateUtil().getSession()) {
-            EntityDao dao = new EntityDao(session);
-
-        }
-    }
 }
