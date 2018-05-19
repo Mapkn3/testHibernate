@@ -6,14 +6,14 @@ CREATE TABLE player (
 
 CREATE TABLE personageClass (
     personageClassId NUMBER NOT NULL,
-    personageClassName VARCHAR(10),
+    personageClassName VARCHAR2(10),
     personageClassFeatures VARCHAR2(200),
     PRIMARY KEY (personageClassId)
 );
 
 CREATE TABLE spell (
     spellId NUMBER NOT NULL,
-    spellName VARCHAR(20),
+    spellName VARCHAR2(20),
     spellDescription VARCHAR2(200),
     forClassId NUMBER NOT NULL,
     PRIMARY KEY (spellId),
