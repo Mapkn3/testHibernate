@@ -22,7 +22,7 @@ CREATE TABLE spell (
 
 CREATE TABLE race (
     raceId NUMBER NOT NULL,
-    raceName VARCHAR2(10) NOT NULL,
+    raceName VARCHAR2(10),
     raceSize VARCHAR2(1),
     raceSpeed NUMBER,
     raceFeatures VARCHAR2(200),
