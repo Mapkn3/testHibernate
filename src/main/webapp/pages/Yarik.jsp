@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Mapkn3
-  Date: 23.05.2018
-  Time: 16:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/style.css" type="text/css" media="all">
     <title>Форма входа HTML5 CSS3</title>
 </head>
 <body>
