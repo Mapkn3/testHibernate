@@ -34,15 +34,21 @@ public class PlayerServlet extends HttpServlet {
             EntityDao dao = new EntityDao(session);
             long id = Long.parseLong(req.getParameter("id"));
             String name = req.getParameter("name");
+            String password = req.getParameter("password");
+            String status = req.getParameter("status");
             PlayerEntity entity = (PlayerEntity) dao.readEntity(PlayerEntity.class, id);
             if (entity == null) {
                 entity = new PlayerEntity();
                 entity.setId(id);
                 entity.setName(name);
+                entity.setPassword(password);
+                entity.setStatus(status);
                 entity.setPersonages(null);
                 dao.createEntity(entity);
             } else {
                 entity.setName(name);
+                entity.setPassword(password);
+                entity.setStatus(status);
                 dao.updateEntity(entity);
             }
         }

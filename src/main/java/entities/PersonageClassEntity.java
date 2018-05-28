@@ -9,6 +9,13 @@ public class PersonageClassEntity extends PrettyEntity {
     private long id;
     private String name;
     private String features;
+    private Long maxHp;
+    private String researchAcrobatics;
+    private String researchBluff;
+    private String researchPerception;
+    private String researchDiplomacy;
+    private String researchSpellcraft;
+    private Long baseAttackBonus;
     private Collection<SpellEntity> spells;
 
     @Id
@@ -41,6 +48,76 @@ public class PersonageClassEntity extends PrettyEntity {
         this.features = features;
     }
 
+    @Basic
+    @Column(name = "MAXHP")
+    public long getMaxHp() {
+        return maxHp;
+    }
+
+    public void setMaxHp(long maxHp) {
+        this.maxHp = maxHp;
+    }
+
+    @Basic
+    @Column(name = "RESEARCHACROBATICS")
+    public String getResearchAcrobatics() {
+        return researchAcrobatics;
+    }
+
+    public void setResearchAcrobatics(String researchAcrobatics) {
+        this.researchAcrobatics = researchAcrobatics;
+    }
+
+    @Basic
+    @Column(name = "RESEARCHBLUFF")
+    public String getResearchBluff() {
+        return researchBluff;
+    }
+
+    public void setResearchBluff(String researchBluff) {
+        this.researchBluff = researchBluff;
+    }
+
+    @Basic
+    @Column(name = "RESEARCHPERCEPTION")
+    public String getResearchPerception() {
+        return researchPerception;
+    }
+
+    public void setResearchPerception(String researchPerception) {
+        this.researchPerception = researchPerception;
+    }
+
+    @Basic
+    @Column(name = "RESEARCHDIPLOMACY")
+    public String getResearchDiplomacy() {
+        return researchDiplomacy;
+    }
+
+    public void setResearchDiplomacy(String researchDiplomacy) {
+        this.researchDiplomacy = researchDiplomacy;
+    }
+
+    @Basic
+    @Column(name = "RESEARCHSPELLCRAFT")
+    public String getResearchSpellcraft() {
+        return researchSpellcraft;
+    }
+
+    public void setResearchSpellcraft(String researchSpellcraft) {
+        this.researchSpellcraft = researchSpellcraft;
+    }
+
+    @Basic
+    @Column(name = "BASEATTACKBONUS")
+    public long getBaseAttackBonus() {
+        return baseAttackBonus;
+    }
+
+    public void setBaseAttackBonus(long baseAttackBonus) {
+        this.baseAttackBonus = baseAttackBonus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,6 +130,20 @@ public class PersonageClassEntity extends PrettyEntity {
             return false;
         if (features != null ? !features.equals(that.features) : that.features != null)
             return false;
+        if (maxHp != null ? !maxHp.equals(that.maxHp) : that.maxHp != null)
+            return false;
+        if (researchAcrobatics != null ? !researchAcrobatics.equals(that.researchAcrobatics) : that.researchAcrobatics != null)
+            return false;
+        if (researchBluff != null ? !researchBluff.equals(that.researchBluff) : that.researchBluff != null)
+            return false;
+        if (researchPerception != null ? !researchPerception.equals(that.researchPerception) : that.researchPerception != null)
+            return false;
+        if (researchDiplomacy != null ? !researchDiplomacy.equals(that.researchDiplomacy) : that.researchDiplomacy != null)
+            return false;
+        if (researchSpellcraft != null ? !researchSpellcraft.equals(that.researchSpellcraft) : that.researchSpellcraft != null)
+            return false;
+        if (baseAttackBonus != null ? !baseAttackBonus.equals(that.baseAttackBonus) : that.baseAttackBonus != null)
+            return false;
 
         return true;
     }
@@ -62,6 +153,13 @@ public class PersonageClassEntity extends PrettyEntity {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (features != null ? features.hashCode() : 0);
+        result = 31 * result + (maxHp != null ? maxHp.hashCode() : 0);
+        result = 31 * result + (researchAcrobatics != null ? researchAcrobatics.hashCode() : 0);
+        result = 31 * result + (researchBluff != null ? researchBluff.hashCode() : 0);
+        result = 31 * result + (researchPerception != null ? researchPerception.hashCode() : 0);
+        result = 31 * result + (researchDiplomacy != null ? researchDiplomacy.hashCode() : 0);
+        result = 31 * result + (researchSpellcraft != null ? researchSpellcraft.hashCode() : 0);
+        result = 31 * result + (baseAttackBonus != null ? baseAttackBonus.hashCode() : 0);
         return result;
     }
 

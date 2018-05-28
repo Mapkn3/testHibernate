@@ -5,6 +5,3 @@ DROP TABLE race;
 DROP TABLE spell;
 DROP TABLE personageClass;
 DROP TABLE player;
-
-
-

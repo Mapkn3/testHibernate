@@ -8,6 +8,8 @@ import java.util.Collection;
 public class PlayerEntity extends PrettyEntity {
     private long id;
     private String name;
+    private String password;
+    private String status;
     private Collection<PersonageEntity> personages;
 
     @Id
@@ -30,6 +32,26 @@ public class PlayerEntity extends PrettyEntity {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "PASSWORD")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Basic
+    @Column(name = "STATUS")
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,6 +61,8 @@ public class PlayerEntity extends PrettyEntity {
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
 
         return true;
     }
@@ -47,6 +71,8 @@ public class PlayerEntity extends PrettyEntity {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 

@@ -35,16 +35,37 @@ public class PersonageClassServlet extends HttpServlet {
             long id = Long.parseLong(req.getParameter("id"));
             String name = req.getParameter("name");
             String features = req.getParameter("features");
+            Long maxHp = Long.valueOf(req.getParameter("maxHp"));
+            String researchAcrobatics = req.getParameter("researchAcrobatics");
+            String researchBluff = req.getParameter("researchBluff");
+            String researchPerception = req.getParameter("researchPerception");
+            String researchDiplomacy = req.getParameter("researchDiplomacy");
+            String researchSpellcraft = req.getParameter("researchSpellcraft");
+            Long baseAttackBonus = Long.valueOf(req.getParameter("baseAttackBonus"));
             PersonageClassEntity entity = (PersonageClassEntity) dao.readEntity(PersonageClassEntity.class, id);
             if (entity == null) {
                 entity = new PersonageClassEntity();
                 entity.setId(id);
                 entity.setName(name);
                 entity.setFeatures(features);
+                entity.setMaxHp(maxHp);
+                entity.setResearchAcrobatics(researchAcrobatics);
+                entity.setResearchBluff(researchBluff);
+                entity.setResearchPerception(researchPerception);
+                entity.setResearchDiplomacy(researchDiplomacy);
+                entity.setResearchSpellcraft(researchSpellcraft);
+                entity.setBaseAttackBonus(baseAttackBonus);
                 dao.createEntity(entity);
             } else {
                 entity.setName(name);
                 entity.setFeatures(features);
+                entity.setMaxHp(maxHp);
+                entity.setResearchAcrobatics(researchAcrobatics);
+                entity.setResearchBluff(researchBluff);
+                entity.setResearchPerception(researchPerception);
+                entity.setResearchDiplomacy(researchDiplomacy);
+                entity.setResearchSpellcraft(researchSpellcraft);
+                entity.setBaseAttackBonus(baseAttackBonus);
                 dao.updateEntity(entity);
             }
         }

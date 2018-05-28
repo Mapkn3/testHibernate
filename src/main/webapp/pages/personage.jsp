@@ -76,8 +76,84 @@
         </select>
     </div>
     <div>
-        <label for="characteristics">characteristics</label>
-        <textarea id="characteristics" name="characteristics"><%=(entity == null) ? "" : entity.getCharacteristics()%></textarea>
+        <label for="hp">hp</label>
+        <input id="hp" name="hp" type="number" min="1"
+                <%=(entity == null)?"":"value=" + entity.getHp()%>/>
+    </div>
+    <div>
+        <label for="age">age</label>
+        <input id="age" name="age" type="number" min="1"
+                <%=(entity == null)?"":"value=" + entity.getAge()%>/>
+    </div>
+    <div>
+        <label for="modAcrobatics">modAcrobatics</label>
+        <input id="modAcrobatics" name="modAcrobatics" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModAcrobatics()%>/>
+    </div>
+    <div>
+        <label for="modBluff">modBluff</label>
+        <input id="modBluff" name="modBluff" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModBluff()%>/>
+    </div>
+    <div>
+        <label for="modPerception">modPerception</label>
+        <input id="modPerception" name="modPerception" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModPerception()%>/>
+    </div>
+    <div>
+        <label for="modDiplomacy">modDiplomacy</label>
+        <input id="modDiplomacy" name="modDiplomacy" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModDiplomacy()%>/>
+    </div>
+    <div>
+        <label for="modSpellcraft">modSpellcraft</label>
+        <input id="modSpellcraft" name="modSpellcraft" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModSpellcraft()%>/>
+    </div>
+    <div>
+        <label for="valStrenght">valStrenght</label>
+        <input id="valStrenght" name="valStrenght" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValStrenght()%>/>
+    </div>
+    <div>
+        <label for="valDexterity">valDexterity</label>
+        <input id="valDexterity" name="valDexterity" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValDexterity()%>/>
+    </div>
+    <div>
+        <label for="valConstitution">valConstitution</label>
+        <input id="valConstitution" name="valConstitution" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValConstitution()%>/>
+    </div>
+    <div>
+        <label for="valIntelligence">valIntelligence</label>
+        <input id="valIntelligence" name="valIntelligence" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValIntelligence()%>/>
+    </div>
+    <div>
+        <label for="valWisdom">valWisdom</label>
+        <input id="valWisdom" name="valWisdom" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValWisdom()%>/>
+    </div>
+    <div>
+        <label for="valCharisma">valCharisma</label>
+        <input id="valCharisma" name="valCharisma" type="number" min="3" max="20"
+                <%=(entity == null)?"":"value=" + entity.getValCharisma()%>/>
+    </div>
+    <div>
+        <label for="modFortitude">modFortitude</label>
+        <input id="modFortitude" name="modFortitude" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModFortitude()%>/>
+    </div>
+    <div>
+        <label for="modReflex">modReflex</label>
+        <input id="modReflex" name="modReflex" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModReflex()%>/>
+    </div>
+    <div>
+        <label for="modWill">modWill</label>
+        <input id="modWill" name="modWill" type="number" min="-5"
+                <%=(entity == null)?"":"value=" + entity.getModWill()%>/>
     </div>
     <div>
         <label for="class">class</label>
