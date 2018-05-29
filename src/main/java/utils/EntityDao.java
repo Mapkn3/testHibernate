@@ -23,7 +23,6 @@ public class EntityDao<E extends PrettyEntity> {
         }
         Transaction transaction = session.beginTransaction();
         session.persist(entity);
-        session.flush();
         transaction.commit();
         return true;
     }
@@ -38,7 +37,6 @@ public class EntityDao<E extends PrettyEntity> {
         }
         Transaction transaction = session.beginTransaction();
         session.merge(entity);
-        session.flush();
         transaction.commit();
         return true;
     }
@@ -49,7 +47,6 @@ public class EntityDao<E extends PrettyEntity> {
         }
         Transaction transaction = session.beginTransaction();
         session.delete(entity);
-        session.flush();
         transaction.commit();
         return true;
     }

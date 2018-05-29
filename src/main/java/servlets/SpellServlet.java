@@ -18,6 +18,7 @@ import java.util.List;
 public class SpellServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("entity", null);
         String idParam = req.getParameter("id");
         try (Session session = new HibernateUtil().getSession()) {
             EntityDao dao = new EntityDao(session);

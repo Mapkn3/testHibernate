@@ -17,12 +17,14 @@ import java.util.List;
 public class PersonageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("entity", null);
         String idParam = req.getParameter("id");
+        String xpParam = req.getParameter("xp");
+        String path = "pages/personage.jsp";
         try (Session session = new HibernateUtil().getSession()) {
             EntityDao dao = new EntityDao(session);
             List<PersonageClassEntity> personageClasses = dao.getAll(PersonageClassEntity.class);
             List<RaceEntity> races = dao.getAll(RaceEntity.class);
-            List<PlayerEntity> players = dao.getAll(PlayerEntity.class);
             List<WeaponEntity> weapons = dao.getAll(WeaponEntity.class);
             req.getSession().setAttribute("classes", personageClasses);
             req.getSession().setAttribute("races", races);
@@ -30,11 +32,16 @@ public class PersonageServlet extends HttpServlet {
             if (idParam != null) {
                 long id = Long.parseLong(idParam);
                 PersonageEntity entity = (PersonageEntity) dao.readEntity(PersonageEntity.class, id);
+                if (xpParam != null) {
+                    entity.setXp(entity.getXp() + Long.parseLong(xpParam));
+                    dao.updateEntity(entity);
+                    path = "pages/allPersonages.jsp";
+                }
                 entity.calculateMod();
                 req.getSession().setAttribute("entity", entity);
             }
         }
-        req.getRequestDispatcher("pages/personage.jsp").forward(req, resp);
+        req.getRequestDispatcher(path).forward(req, resp);
     }
 
     @Override
@@ -61,6 +68,10 @@ public class PersonageServlet extends HttpServlet {
             long weapon3Id = Long.parseLong(req.getParameter("weapon3"));
             long ownerId = (long)req.getSession().getAttribute("userId");
             PersonageClassEntity personageClass = (PersonageClassEntity) dao.readEntity(PersonageClassEntity.class, classId);
+            long maxHp = personageClass.getMaxHp() * level;
+            if (hp > maxHp) {
+                hp = maxHp;
+            }
             RaceEntity race = (RaceEntity) dao.readEntity(RaceEntity.class, raceId);
             WeaponEntity weapon1 = (WeaponEntity) dao.readEntity(WeaponEntity.class, weapon1Id);
             WeaponEntity weapon2 = (WeaponEntity) dao.readEntity(WeaponEntity.class, weapon2Id);

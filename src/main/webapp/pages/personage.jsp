@@ -105,7 +105,7 @@
     </div>
     <div>
         <label for="hp">hp</label>
-        <input id="hp" name="hp" type="number" min="1"
+        <input id="hp" name="hp" type="number" min="0"
                value="<%=(entity == null) ? "" : entity.getHp()%>"/>
     </div>
     <div>
