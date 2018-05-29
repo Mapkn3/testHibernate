@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/Player")
 public class PlayerServlet extends HttpServlet {
@@ -31,27 +32,29 @@ public class PlayerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Session session = new HibernateUtil().getSession()) {
-            EntityDao dao = new EntityDao(session);
+            EntityDao<PlayerEntity> dao = new EntityDao<>(session);
             long id = Long.parseLong(req.getParameter("id"));
             String name = req.getParameter("name");
             String password = req.getParameter("password");
             String status = req.getParameter("status");
-            PlayerEntity entity = (PlayerEntity) dao.readEntity(PlayerEntity.class, id);
+            List<PlayerEntity> entities = dao.getAll(PlayerEntity.class);
+            PlayerEntity entity = dao.readEntity(PlayerEntity.class, id);
             if (entity == null) {
-                entity = new PlayerEntity();
-                entity.setId(id);
-                entity.setName(name);
-                entity.setPassword(password);
-                entity.setStatus(status);
-                entity.setPersonages(null);
-                dao.createEntity(entity);
+                if (entities.stream().anyMatch(x -> x.getName().equals(name))) {
+                    resp.sendRedirect("pages/errors/playerErrorPage.jsp?errorMessage=Incorrect+login");
+                } else {
+                    entity = new PlayerEntity();
+                    entity.setId(id);
+                    entity.setName(name);
+                    entity.setPassword(password);
+                    entity.setStatus(status);
+                    entity.setPersonages(null);
+                    dao.createEntity(entity);
+                    resp.sendRedirect("pages/Yarik.jsp");
+                }
             } else {
-                entity.setName(name);
-                entity.setPassword(password);
-                entity.setStatus(status);
-                dao.updateEntity(entity);
+                resp.sendRedirect("pages/errors/playerErrorPage.jsp?errorMessage=Incorrect+id");
             }
         }
-        resp.sendRedirect("entities?type=Player&action=show");
     }
 }

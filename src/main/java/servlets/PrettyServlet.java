@@ -1,6 +1,9 @@
 package servlets;
 
+import entities.PersonageEntity;
 import entities.PrettyEntity;
+import entities.WeaponEntity;
+import entities.WeaponOfPersonageEntity;
 import org.hibernate.Session;
 import utils.EntityDao;
 import utils.HibernateUtil;
@@ -25,6 +28,11 @@ public class PrettyServlet extends HttpServlet {
             switch (action) {
                 case "show":
                     List entities = dao.getAll(entityClass);
+                    if (type.equals("Personage")) {
+                        for (Object entity : entities) {
+                            ((PersonageEntity)entity).calculateMod();
+                        }
+                    }
                     req.getSession().setAttribute("entities", entities);
                     req.getSession().setAttribute("metadata", entityClass);
                     req.getRequestDispatcher("pages/show.jsp").forward(req, resp);
@@ -33,9 +41,15 @@ public class PrettyServlet extends HttpServlet {
                     Long id = Long.valueOf(req.getParameter("id"));
                     PrettyEntity entity = dao.readEntity(entityClass, id);
                     if (entity != null) {
+                        if (type.equals("Personage")) {
+                            for (WeaponOfPersonageEntity weaponOfPersonage : ((PersonageEntity)entity).getWeapons()) {
+                                dao.deleteEntity(weaponOfPersonage);
+                            }
+                        }
                         dao.deleteEntity(entity);
                     }
-                    resp.sendRedirect(req.getContextPath() + "/entities?action=show&type=" + type);
+                    //resp.sendRedirect(req.getContextPath() + "/entities?action=show&type=" + type);
+                    resp.sendRedirect(req.getContextPath()+"/index.jsp");
                     break;
                 case "edit":
                     resp.sendRedirect(req.getContextPath() + "/" + type + "?id=" + req.getParameter("id"));

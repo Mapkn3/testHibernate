@@ -3,8 +3,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles/style.css" type="text/css" media="all">
-    <title>Форма входа HTML5 CSS3</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css" type="text/css" media="all">
+    <title>Start</title>
 </head>
 <body>
 <div class="container">
@@ -19,11 +19,9 @@
             </div>
             <div>
                 <input value="Войти" type="submit">
-                <a href="#">Напомнить пароль?</a>
-                <a href="#">Регистрация</a>
+                <a href="${pageContext.request.contextPath}/Player">Регистрация</a>
             </div>
         </form><!-- form -->
-        <div class="button"><a href="#">Скачать</a></div><!-- button -->
         <%
             String errorMessage = request.getParameter("m");
             if (errorMessage != null) {

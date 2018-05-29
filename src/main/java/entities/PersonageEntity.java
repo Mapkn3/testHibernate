@@ -13,24 +13,84 @@ public class PersonageEntity extends PrettyEntity {
     private String alignment;
     private Long hp;
     private Long age;
-    private Long modAcrobatics;
-    private Long modBluff;
-    private Long modPerception;
-    private Long modDiplomacy;
-    private Long modSpellcraft;
-    private Long valStrenght;
-    private Long valDexterity;
-    private Long valConstitution;
-    private Long valIntelligence;
-    private Long valWisdom;
-    private Long valCharisma;
-    private Long modFortitude;
-    private Long modReflex;
-    private Long modWill;
+    private Long modAcrobatics;//акробатика (лвк)
+    private Long modBluff;//блеф (хар)
+    private Long modPerception;//внимание (мдр)
+    private Long modDiplomacy;//дипломатия (хар)
+    private Long modSpellcraft;//колдовство (инт)
+    private Long valStrenght;//сила
+    private Long valDexterity;//ловкость
+    private Long valConstitution;//выносливость
+    private Long valIntelligence;//интеллект
+    private Long valWisdom;//мудрость
+    private Long valCharisma;//харизма
+    private Long modFortitude;//стойкость (вын)
+    private Long modReflex;//реакция (лвк)
+    private Long modWill;//воля (мдр)
     private PersonageClassEntity personageClass;
     private RaceEntity race;
     private PlayerEntity owner;
     private Collection<WeaponOfPersonageEntity> weapons;
+    private Long modStrenght;
+    private Long modDexterity;
+    private Long modConstitution;
+    private Long modIntelligence;
+    private Long modWisdom;
+    private Long modCharisma;
+
+    @Transient
+    public Long getModStrenght() {
+        return modStrenght;
+    }
+
+    public void setModStrenght(Long valStrenght) {
+        this.modStrenght = getModBased(valStrenght);
+    }
+
+    @Transient
+    public Long getModDexterity() {
+        return modDexterity;
+    }
+
+    public void setModDexterity(Long valDexterity) {
+        this.modDexterity = getModBased(valDexterity);
+    }
+
+    @Transient
+    public Long getModConstitution() {
+        return modConstitution;
+    }
+
+    public void setModConstitution(Long valConstitution) {
+        this.modConstitution = getModBased(valConstitution);
+    }
+
+    @Transient
+    public Long getModIntelligence() {
+        return modIntelligence;
+    }
+
+    public void setModIntelligence(Long valIntelligence) {
+        this.modIntelligence = getModBased(valIntelligence);
+    }
+
+    @Transient
+    public Long getModWisdom() {
+        return modWisdom;
+    }
+
+    public void setModWisdom(Long valWisdom) {
+        this.modWisdom = getModBased(valWisdom);
+    }
+
+    @Transient
+    public Long getModCharisma() {
+        return modCharisma;
+    }
+
+    public void setModCharisma(Long valCharisma) {
+        this.modCharisma = getModBased(valCharisma);
+    }
 
     @Id
     @Column(name = "PERSONAGEID")
@@ -366,5 +426,48 @@ public class PersonageEntity extends PrettyEntity {
 
     public static Long calculateLevel(Long xp) {
         return (xp / 2000) + 1;
+    }
+
+    public long getModBased(long val) {
+        if (val > 8) {
+            return (val + 1 - 10) / 2;
+        } else {
+            return (val - 10) / 2;
+        }
+    }
+
+    public void calculateMod() {
+        this.setModStrenght(this.valStrenght);
+        this.setModDexterity(this.valDexterity);
+        this.setModConstitution(this.valConstitution);
+        this.setModIntelligence(this.valIntelligence);
+        this.setModWisdom(this.valWisdom);
+        this.setModCharisma(this.valCharisma);
+
+        this.modAcrobatics = this.getModDexterity();
+        this.modBluff = this.getModCharisma();
+        this.modPerception = this.getModWisdom();
+        this.modDiplomacy = this.getModCharisma();
+        this.modSpellcraft = this.getModIntelligence();
+
+        this.modFortitude = this.getModConstitution() + getPersonageClass().getBaseAttackBonus()+getLevel()-1;
+        this.modReflex = this.getModDexterity() + getPersonageClass().getBaseAttackBonus()+getLevel()-1;
+        this.modWill = this.getModWisdom() + getPersonageClass().getBaseAttackBonus()+getLevel()-1;
+
+        if (this.getPersonageClass().getResearchAcrobatics().equals("y")) {
+            this.modAcrobatics += 3 + getLevel();
+        }
+        if (this.getPersonageClass().getResearchBluff().equals("y")) {
+            this.modBluff += 3 + getLevel();
+        }
+        if (this.getPersonageClass().getResearchPerception().equals("y")) {
+            this.modPerception += 3 + getLevel();
+        }
+        if (this.getPersonageClass().getResearchDiplomacy().equals("y")) {
+            this.modDiplomacy += 3 + getLevel();
+        }
+        if (this.getPersonageClass().getResearchSpellcraft().equals("y")) {
+            this.modSpellcraft += 3 + getLevel();
+        }
     }
 }

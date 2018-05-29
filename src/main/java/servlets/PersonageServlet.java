@@ -26,11 +26,11 @@ public class PersonageServlet extends HttpServlet {
             List<WeaponEntity> weapons = dao.getAll(WeaponEntity.class);
             req.getSession().setAttribute("classes", personageClasses);
             req.getSession().setAttribute("races", races);
-            req.getSession().setAttribute("players", players);
             req.getSession().setAttribute("weapons", weapons);
             if (idParam != null) {
                 long id = Long.parseLong(idParam);
                 PersonageEntity entity = (PersonageEntity) dao.readEntity(PersonageEntity.class, id);
+                entity.calculateMod();
                 req.getSession().setAttribute("entity", entity);
             }
         }
@@ -46,29 +46,20 @@ public class PersonageServlet extends HttpServlet {
             Long xp = Long.valueOf(req.getParameter("xp"));
             Long level = PersonageEntity.calculateLevel(xp);
             String alignment = req.getParameter("alignment");
-            String characteristics = req.getParameter("characteristics");
             Long hp = Long.valueOf(req.getParameter("hp"));
             Long age = Long.valueOf(req.getParameter("age"));
-            Long modAcrobatics = Long.valueOf(req.getParameter("modAcrobatics"));
-            Long modBluff = Long.valueOf(req.getParameter("modBluff"));
-            Long modPerception = Long.valueOf(req.getParameter("modPerception"));
-            Long modDiplomacy = Long.valueOf(req.getParameter("modDiplomacy"));
-            Long modSpellcraft = Long.valueOf(req.getParameter("modSpellcraft"));
             Long valStrenght = Long.valueOf(req.getParameter("valStrenght"));
             Long valDexterity = Long.valueOf(req.getParameter("valDexterity"));
             Long valConstitution = Long.valueOf(req.getParameter("valConstitution"));
             Long valIntelligence = Long.valueOf(req.getParameter("valIntelligence"));
             Long valWisdom = Long.valueOf(req.getParameter("valWisdom"));
             Long valCharisma = Long.valueOf(req.getParameter("valCharisma"));
-            Long modFortitude = Long.valueOf(req.getParameter("modFortitude"));
-            Long modReflex = Long.valueOf(req.getParameter("modReflex"));
-            Long modWill = Long.valueOf(req.getParameter("modWill"));
             long classId = Long.parseLong(req.getParameter("class"));
             long raceId = Long.parseLong(req.getParameter("race"));
             long weapon1Id = Long.parseLong(req.getParameter("weapon1"));
             long weapon2Id = Long.parseLong(req.getParameter("weapon2"));
             long weapon3Id = Long.parseLong(req.getParameter("weapon3"));
-            long ownerId = Long.parseLong(req.getParameter("player"));
+            long ownerId = (long)req.getSession().getAttribute("userId");
             PersonageClassEntity personageClass = (PersonageClassEntity) dao.readEntity(PersonageClassEntity.class, classId);
             RaceEntity race = (RaceEntity) dao.readEntity(RaceEntity.class, raceId);
             WeaponEntity weapon1 = (WeaponEntity) dao.readEntity(WeaponEntity.class, weapon1Id);
@@ -85,23 +76,16 @@ public class PersonageServlet extends HttpServlet {
                 entity.setAlignment(alignment);
                 entity.setHp(hp);
                 entity.setAge(age);
-                entity.setModAcrobatics(modAcrobatics);
-                entity.setModBluff(modBluff);
-                entity.setModPerception(modPerception);
-                entity.setModDiplomacy(modDiplomacy);
-                entity.setModSpellcraft(modSpellcraft);
                 entity.setValStrenght(valStrenght);
                 entity.setValDexterity(valDexterity);
                 entity.setValConstitution(valConstitution);
                 entity.setValIntelligence(valIntelligence);
                 entity.setValWisdom(valWisdom);
                 entity.setValCharisma(valCharisma);
-                entity.setModFortitude(modFortitude);
-                entity.setModReflex(modReflex);
-                entity.setModWill(modWill);
                 entity.setPersonageClass(personageClass);
                 entity.setRace(race);
                 entity.setOwner(owner);
+                entity.calculateMod();
                 dao.createEntity(entity);
                 WeaponOfPersonageEntity wop1 = new WeaponOfPersonageEntity();
                 wop1.setId(1000000000L + entity.getId());
@@ -125,23 +109,16 @@ public class PersonageServlet extends HttpServlet {
                 entity.setAlignment(alignment);
                 entity.setHp(hp);
                 entity.setAge(age);
-                entity.setModAcrobatics(modAcrobatics);
-                entity.setModBluff(modBluff);
-                entity.setModPerception(modPerception);
-                entity.setModDiplomacy(modDiplomacy);
-                entity.setModSpellcraft(modSpellcraft);
                 entity.setValStrenght(valStrenght);
                 entity.setValDexterity(valDexterity);
                 entity.setValConstitution(valConstitution);
                 entity.setValIntelligence(valIntelligence);
                 entity.setValWisdom(valWisdom);
                 entity.setValCharisma(valCharisma);
-                entity.setModFortitude(modFortitude);
-                entity.setModReflex(modReflex);
-                entity.setModWill(modWill);
                 entity.setPersonageClass(personageClass);
                 entity.setRace(race);
                 entity.setOwner(owner);
+                entity.calculateMod();
                 dao.updateEntity(entity);
                 WeaponOfPersonageEntity wop1 = (WeaponOfPersonageEntity) dao.readEntity(WeaponOfPersonageEntity.class, 1000000000L + entity.getId());
                 wop1.setWeapon(weapon1);
@@ -154,6 +131,7 @@ public class PersonageServlet extends HttpServlet {
                 dao.updateEntity(wop3);
             }
         }
-        resp.sendRedirect("entities?type=Personage&action=show");
+        //resp.sendRedirect("entities?type=Personage&action=show");
+        resp.sendRedirect(req.getContextPath()+"/index.jsp");
     }
 }
