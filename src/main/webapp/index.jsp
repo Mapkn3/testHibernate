@@ -31,7 +31,7 @@
                 break;
             case "master":
 %>
-                <a href="${pageContext.request.contextPath}/pages/allPersonages.jsp">personage</a>
+                <a href="${pageContext.request.contextPath}/pages/allPersonages.jsp">personages</a>
                 <a href="${pageContext.request.contextPath}/entities?type=Race&action=show">race</a>
                 <a href="${pageContext.request.contextPath}/entities?type=PersonageClass&action=show">class</a>
                 <a href="${pageContext.request.contextPath}/entities?type=Spell&action=show">spell</a>

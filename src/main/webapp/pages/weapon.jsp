@@ -23,12 +23,12 @@
     <div>
         <label for="attackBonus">attack bonus: +</label>
         <input id="attackBonus" name="attackBonus" type="number" min="0" max="5"
-                <%=(entity == null) ? "" : "value=" + entity.getAttackBonus().toString()%>/>
+        value="<%=(entity == null) ? "" : entity.getAttackBonus().toString()%>"/>
     </div>
     <div>
         <label for="criticalBonus">critical bonus: x</label>
         <input id="criticalBonus" name="criticalBonus" type="number" min="0" max="5"
-                <%=(entity == null) ? "" : "value=" + entity.getCriticalBonus().toString()%>/>
+        value="<%=(entity == null) ? "" : entity.getCriticalBonus().toString()%>"/>
     </div>
     <div>
         <label for="type">type</label>

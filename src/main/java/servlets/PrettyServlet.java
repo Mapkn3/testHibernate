@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/entities")
 public class PrettyServlet extends HttpServlet {
@@ -43,6 +45,14 @@ public class PrettyServlet extends HttpServlet {
                     if (entity != null) {
                         if (type.equals("Personage")) {
                             for (WeaponOfPersonageEntity weaponOfPersonage : ((PersonageEntity)entity).getWeapons()) {
+                                dao.deleteEntity(weaponOfPersonage);
+                            }
+                        }
+                        if (type.equals("Weapon")) {
+                            Object pairs = dao.getAll(WeaponOfPersonageEntity.class).stream()
+                                    .filter(x -> ((WeaponOfPersonageEntity)x).getWeapon().primaryKey() == id)
+                                    .collect(Collectors.toList());
+                            for (WeaponOfPersonageEntity weaponOfPersonage : (List<WeaponOfPersonageEntity>)pairs) {
                                 dao.deleteEntity(weaponOfPersonage);
                             }
                         }
